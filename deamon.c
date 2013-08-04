@@ -19,24 +19,25 @@ void log_message(filename,message)
 char *filename;
 char *message;
 {
-    FILE *logfile;
+	FILE *logfile;
 	logfile=fopen(filename,"a");
 	if(!logfile) return;
-    fprintf(logfile,"%s\n",message);
+	fprintf(logfile,"%s\n",message);
 	fclose(logfile);
 }
 
 void signal_handler(sig)
 int sig;
 {
-	switch(sig) {
-	case SIGHUP:
-		log_message(LOG_FILE,"hangup signal catched");
-		break;
-	case SIGTERM:
-		log_message(LOG_FILE,"terminate signal catched");
-		exit(0);
-		break;
+	switch(sig) 
+	{
+		case SIGHUP:
+			log_message(LOG_FILE,"hangup signal catched");
+			break;
+		case SIGTERM:
+			log_message(LOG_FILE,"terminate signal catched");
+			exit(0);
+			break;
 	}
 }
 
@@ -68,8 +69,8 @@ int writelockfile(const char *filepath, const char *openfile)
 
 void daemonize()
 {
-    int i,lfp;
-    char str[10];
+	int i,lfp;
+	char str[10];
 	if(getppid()==1) return; /* already a daemon */
 	i=fork();
 	if (i<0) exit(1); /* fork error */
